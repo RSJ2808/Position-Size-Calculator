@@ -46,7 +46,7 @@ with col3:
 with col4:
     fees_percent = st.number_input(
         "Fees (%)",
-        value=0.10,
+        value=0.20,
         min_value=0.00,
         max_value=100.0,
         step=0.01,
