@@ -1,7 +1,6 @@
 import streamlit as st
 
-# Title
-st.title("📊 Position Size Calculator")
+st.set_page_config(page_title="Position Size Calculator", layout="centered")
 
 # --- Input Fields ---
 
