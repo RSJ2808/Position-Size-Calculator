@@ -83,7 +83,6 @@ gross_profit = (position_size * reward_percent) / 100
 net_profit = gross_profit - ((fees_percent / 100) * position_size)
 
 # --- Output Fields ---
-st.markdown("### 🧮 Results")
 st.markdown(f"**Required Position Size:** ${adjusted_position_size:,.2f}")
 st.markdown(f"**Profit if Take-Profit is Hit:** ${net_profit:,.2f} (after fees)")
 
