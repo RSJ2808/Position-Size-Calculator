@@ -2,61 +2,77 @@ import streamlit as st
 
 st.set_page_config(page_title="Position Size Calculator", layout="centered")
 
+# Custom CSS to make everything more compact
+st.markdown("""
+    <style>
+        .css-18e3th9 {  /* Adjust the title font size */
+            font-size: 1.5rem;
+        }
+        .css-1v3fvcr {  /* Input fields and buttons padding */
+            padding: 0.2rem;
+        }
+        .css-ffhzg2 {  /* Reduce the height of buttons */
+            height: 2rem;
+        }
+        .css-h6ntur {  /* Adjust markdown header size */
+            font-size: 1.25rem;
+        }
+        .css-k9y4e6 {  /* Input labels font size */
+            font-size: 1rem;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # --- Input Fields ---
+st.markdown("#### Position Size Calculator")
 
-# Account Balance and Risk % (in two columns)
-col1, col2 = st.columns(2)
-with col1:
-    account_balance = st.number_input(
-        "Account Balance ($)",
-        value=2700.00,
-        min_value=0.0,
-        step=100.0,
-        format="%.2f",
-        help="Total capital in your trading account"
-    )
+# Account Balance and Risk % (Stacked for mobile)
+account_balance = st.number_input(
+    "Account Balance ($)",
+    value=2700.00,
+    min_value=0.0,
+    step=100.0,
+    format="%.2f",
+    help="Total capital in your trading account"
+)
 
-with col2:
-    risk_percent = st.number_input(
-        "Risk per Trade (%)",
-        value=3.0,
-        step=0.5,
-        format="%.2f",
-        help="How much of your account you're willing to risk on one trade"
-    )
+risk_percent = st.number_input(
+    "Risk per Trade (%)",
+    value=3.0,
+    step=0.5,
+    format="%.2f",
+    help="How much of your account you're willing to risk on one trade"
+)
 
 # Calculated risk in dollars
 risk_dollars = (risk_percent / 100) * account_balance
 st.markdown(f"**Risk Amount ($):** ${risk_dollars:,.2f}")
 
-# Stop Loss and Fees % (in two columns)
-col3, col4 = st.columns(2)
-with col3:
-    stop_loss_percent = st.number_input(
-        "Stop Loss (%)",
-        value=3.00,
-        min_value=0.01,
-        max_value=100.0,
-        step=0.1,
-        format="%.2f",
-        help="How much price can move against you before you exit the trade"
-    )
+# Stop Loss and Fees % (Stacked for mobile)
+stop_loss_percent = st.number_input(
+    "Stop Loss (%)",
+    value=3.00,
+    min_value=0.01,
+    max_value=100.0,
+    step=0.1,
+    format="%.2f",
+    help="How much price can move against you before you exit the trade"
+)
 
-with col4:
-    fees_percent = st.number_input(
-        "Fees (%)",
-        value=0.20,
-        min_value=0.00,
-        max_value=100.0,
-        step=0.01,
-        format="%.2f",
-        help="Trading fees charged by your broker (in % of position size)"
-    )
+fees_percent = st.number_input(
+    "Fees (%)",
+    value=0.10,
+    min_value=0.00,
+    max_value=100.0,
+    step=0.01,
+    format="%.2f",
+    help="Trading fees charged by your broker (in % of position size)"
+)
 
 # Risk-to-Reward Ratio
 rr_ratio = st.number_input(
     "Risk:Reward Ratio",
-    value=3.0,
+    value=2.0,
     min_value=0.01,
     step=0.1,
     format="%.2f",
@@ -94,3 +110,4 @@ with st.expander("ℹ️ How calculations work"):
     - **Adjusted Position Size** = Position Size ÷ Leverage
     - **Profit (TP hit)** = (Position Size × Stop Loss % × R:R) − Fees
     """)
+
