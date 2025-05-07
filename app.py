@@ -12,7 +12,8 @@ risk_percent = st.radio(
     "Risk per Trade (%)",
     options=[0.5, 1, 1.5, 2, 3, 5],
     format_func=lambda x: f"{x}%",
-    index=1
+    index=1,
+    horizontal=True  # Horizontally aligned buttons
 )
 
 # Calculated risk in dollars
@@ -29,15 +30,19 @@ fees_percent = st.number_input("Fees (%)", value=0.10, min_value=0.00, max_value
 rr_ratio = st.number_input("Risk:Reward Ratio", value=2.0, min_value=0.01, step=0.1, format="%.2f")
 
 # Leverage
-leverage = st.radio("Leverage", options=[1, 2, 3, 4, 5, 10], format_func=lambda x: f"{x}x", index=0)
+leverage = st.radio(
+    "Leverage",
+    options=[1, 2, 3, 4, 5, 10],
+    format_func=lambda x: f"{x}x",
+    index=0,
+    horizontal=True  # Horizontally aligned buttons
+)
 
 # --- Calculations ---
-# Effective risk % includes stop loss and fees
 total_risk_percent = stop_loss_percent + fees_percent
-position_size = (risk_dollars / total_risk_percent) * 100  # Calculate position size in $
+position_size = (risk_dollars / total_risk_percent) * 100  # Position size in $
 adjusted_position_size = position_size / leverage  # Adjust for leverage
 
-# Calculate profit if TP hit
 reward_percent = stop_loss_percent * rr_ratio
 gross_profit = (position_size * reward_percent) / 100
 net_profit = gross_profit - ((fees_percent / 100) * position_size)
