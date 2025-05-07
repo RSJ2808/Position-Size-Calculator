@@ -57,7 +57,7 @@ with col4:
 # Risk-to-Reward Ratio
 rr_ratio = st.number_input(
     "Risk:Reward Ratio",
-    value=2.0,
+    value=3.0,
     min_value=0.01,
     step=0.1,
     format="%.2f",
