@@ -1,12 +1,13 @@
 import streamlit as st
 
-st.set_page_config(page_title="Position Size Calculator", layout="centered")
+# Set up the page layout and remove Streamlit's default header
+st.set_page_config(page_title="Position Size Calculator", layout="centered", initial_sidebar_state="collapsed")
 
-# Custom CSS to make everything more compact
+# Custom CSS to remove margins, padding, and compact the app further
 st.markdown("""
     <style>
-        .css-18e3th9 {  /* Adjust the title font size */
-            font-size: 1.5rem;
+        .css-18e3th9 {  /* Adjust the title font size (hide it) */
+            display: none;
         }
         .css-1v3fvcr {  /* Input fields and buttons padding */
             padding: 0.2rem;
@@ -20,13 +21,15 @@ st.markdown("""
         .css-k9y4e6 {  /* Input labels font size */
             font-size: 1rem;
         }
+        /* Make the layout more compact */
+        .stApp {
+            padding-top: 0rem;
+            padding-bottom: 0rem;
+        }
     </style>
 """, unsafe_allow_html=True)
 
 # --- Input Fields ---
-st.markdown("#### Position Size Calculator")
-
-# Account Balance and Risk % (Stacked for mobile)
 account_balance = st.number_input(
     "Account Balance ($)",
     value=2700.00,
@@ -59,9 +62,10 @@ stop_loss_percent = st.number_input(
     help="How much price can move against you before you exit the trade"
 )
 
+# Default fees set to 0.20
 fees_percent = st.number_input(
     "Fees (%)",
-    value=0.10,
+    value=0.20,
     min_value=0.00,
     max_value=100.0,
     step=0.01,
@@ -69,10 +73,10 @@ fees_percent = st.number_input(
     help="Trading fees charged by your broker (in % of position size)"
 )
 
-# Risk-to-Reward Ratio
+# Risk-to-Reward Ratio (Default set to 3)
 rr_ratio = st.number_input(
     "Risk:Reward Ratio",
-    value=2.0,
+    value=3.0,
     min_value=0.01,
     step=0.1,
     format="%.2f",
@@ -110,4 +114,3 @@ with st.expander("ℹ️ How calculations work"):
     - **Adjusted Position Size** = Position Size ÷ Leverage
     - **Profit (TP hit)** = (Position Size × Stop Loss % × R:R) − Fees
     """)
-
