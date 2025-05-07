@@ -18,12 +18,11 @@ with col1:
     )
 
 with col2:
-    risk_percent = st.radio(
+    risk_percent = st.number_input(
         "Risk per Trade (%)",
-        options=[0.5, 1, 1.5, 2, 3, 5],
-        format_func=lambda x: f"{x}%",
-        index=1,
-        horizontal=True,
+        value=3.0,
+        step=0.5,
+        format="%.2f",
         help="How much of your account you're willing to risk on one trade"
     )
 
@@ -65,13 +64,13 @@ rr_ratio = st.number_input(
     help="How much you aim to gain for every $1 risked"
 )
 
-# Leverage (horizontal radio buttons)
-leverage = st.radio(
+# Leverage
+leverage = st.number_input(
     "Leverage",
-    options=[1, 2, 3, 4, 5, 10],
-    format_func=lambda x: f"{x}x",
-    index=0,
-    horizontal=True,
+    value=1,
+    min_value=1,
+    step=1,
+    format="%d",
     help="Leverage allows you to control a larger position with less capital (does not change risk)"
 )
 
