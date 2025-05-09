@@ -76,7 +76,7 @@ fees_percent = st.number_input(
 # Risk-to-Reward Ratio (Default set to 3)
 rr_ratio = st.number_input(
     "Risk:Reward Ratio",
-    value=3.0,
+    value=2.5,
     min_value=0.01,
     step=0.1,
     format="%.2f",
