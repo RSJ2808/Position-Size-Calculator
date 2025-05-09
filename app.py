@@ -32,7 +32,7 @@ st.markdown("""
 # --- Input Fields ---
 account_balance = st.number_input(
     "Account Balance ($)",
-    value=2700.00,
+    value=4000.00,
     min_value=0.0,
     step=100.0,
     format="%.2f",
